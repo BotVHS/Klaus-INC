@@ -30,5 +30,7 @@ Si no se especifica el correo electrónico y la cantidad de peticiones a través
 
 # Ejemplo de Uso
 
-```python email_bomber.py ejemplo@gmail.com 5```
+```bash
+python email_bomber.py ejemplo@gmail.com 5
+```
 Este comando enviará 5 peticiones al correo electrónico ejemplo@gmail.com utilizando API's. Si no se especifican los argumentos, el script solicitará la información necesaria durante la ejecución.
