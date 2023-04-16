@@ -11,8 +11,9 @@ Puede instalar estas bibliotecas utilizando el siguiente comando en su terminal:
 El script se puede ejecutar desde la línea de comandos con los siguientes argumentos opcionales:
 
 - Uso: 
-    ```bash email_bomber.py [-h] [email] [cantidad]
-    ```
+```bash
+email_bomber.py [-h] [email] [cantidad]
+```
 
 Realizar peticiones a la API de Verificación de correo
 
