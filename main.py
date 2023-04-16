@@ -4,16 +4,16 @@ import argparse
 import platform
 import os
 
-# Detectar el sistema operativo
+# sistema operativo
 if platform.system() == "Windows":
     clear_command = "cls"
 else:
     clear_command = "clear"
 
-# Ejecutar el comando para limpiar la consola
+#limpiar la consola
 os.system(clear_command)
 
-# Imprimir el mensaje de bienvenida
+
 print("                                      ***********************************************                                        ")
 print("                                      *                                             *                                        ")
 print("                                      *          KLAUS INC. - Email Bomber          *                                        ")
