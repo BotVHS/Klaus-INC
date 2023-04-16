@@ -19,11 +19,11 @@ email_bomber.py [-h] [email] [cantidad]
 
 Realizar peticiones a la API de Verificación de correo
 
-Argumentos Posicionales:
+- Argumentos Posicionales:
 1. `email`     -  Correo electrónico al que se enviarán las peticiones
 2. `cantidad`  -  Cantidad de peticiones que se desean realizar
 
-Argumentos Opcionales:
+- Argumentos Opcionales:
 1. `-h` `--help`  -  Muestra el mensaje de ayuda
 
 Si no se especifica el correo electrónico y la cantidad de peticiones a través de los argumentos, el script le solicitará esta información durante la ejecución.
