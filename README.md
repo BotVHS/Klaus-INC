@@ -5,7 +5,9 @@ Esta script en Python es una herramienta para realizar ataques a correos electr�
 Este script requiere la instalación de Python 3 y las bibliotecas `requests` y `argparse`.
 Puede instalar estas bibliotecas utilizando el siguiente comando en su terminal:
 
-```pip install requests argparse```
+```bash
+pip install requests argparse
+```
 
 # Como usar
 El script se puede ejecutar desde la línea de comandos con los siguientes argumentos opcionales:
